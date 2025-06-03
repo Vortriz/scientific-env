@@ -1,0 +1,19 @@
+[completion]
+copilot = true
+
+[display]
+code_editor_font_size = 16
+
+[language_servers.pylsp]
+enabled = true
+enable_mypy = true
+enable_ruff = true
+
+[package_management]
+manager = "uv"
+
+[runtime]
+auto_instantiate = false
+
+[save]
+format_on_save = true
