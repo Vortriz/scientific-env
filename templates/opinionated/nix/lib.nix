@@ -38,5 +38,5 @@ in {
         });
     };
 
-    getLangAttr = cfg: attr: lib.forEach (lib.attrsets.attrNames cfg.lang) (l: cfg.lang.${l}.${attr});
+    getLangAttr = cfg: attr: lib.forEach (lib.attrsets.attrNames cfg) (l: cfg.${l}.${attr});
 }

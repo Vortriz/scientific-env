@@ -59,30 +59,25 @@
                         modules = [(import ./nix/module.nix {inherit lib pkgs inputs;})];
                     }).config;
             in {
-                inherit cfg lib;
-
                 formatter = pkgs.alejandra;
 
                 devShells.default = pkgs.devshell.mkShell {
                     name = "scientific-dev";
 
-                    # To collect all lang.*.package, lang.*.extraPackages and merge it with additionalPackages
+                    # To collect all `package` and `extraPackages`
                     packages =
                         lib.lists.filter (lib.isDerivation) (lib.getLangAttr cfg "package")
-                        ++ lib.lists.flatten (lib.getLangAttr cfg "extraPackages")
-                        ++ cfg.additionalPackages;
+                        ++ lib.lists.flatten (lib.getLangAttr cfg "extraPackages");
 
-                    # To collect all lang.*.env and merge it with cfg.env
+                    # To collect all `env`
                     env = lib.attrsets.attrsToList (
                         lib.mergeAttrsList (lib.getLangAttr cfg "env")
-                        // cfg.env
                     );
 
                     devshell = {
-                        # To collect all lang.*.shellHook and merge it with cfg.shellHook
+                        # To collect all `shellHook`
                         startup.default.text = lib.strings.concatLines (
                             lib.getLangAttr cfg "shellHook"
-                            ++ [cfg.shellHook]
                         );
 
                         motd = ''
