@@ -1,14 +1,11 @@
 # scientific-env
 
-[TODO] look at the todos
-[TODO] fix default template
-
 Setup per project scientific development environments with ease, without dependency conflicts or messing up your global environment, all while preserving whatever sanity you have left!
 
 ## Features
 
-- Python - Excellent support for using Python via [uv](https://docs.astral.sh/uv)
-- Julia - Just Works™. Support for X11 dependant packages via [xwayland-satellite](https://github.com/Supreeeme/xwayland-satellite) (looking at you `GLMakie`).
+- **Python** - Excellent support for using Python via [uv](https://docs.astral.sh/uv)
+- **Julia** - Just Works™. Support for X11 dependant packages via [xwayland-satellite](https://github.com/Supreeeme/xwayland-satellite) (looking at you `GLMakie`).
 - Configure painlessly with a single file `config.nix`. Get messy with nix when you want to!
 - Straightforward to extend to a new language, with modules (PRs are welcome!).
 
@@ -16,19 +13,23 @@ Setup per project scientific development environments with ease, without depende
 
 0. Install [Nix](https://nixos.org/download/) if you don't have it already. Make sure to enable flakes support by adding the following to `~/.config/nix/nix.conf` or `/etc/nix/nix.conf`:
 
-```
-experimental-features = nix-command flakes
-```
+    ```
+    experimental-features = nix-command flakes
+    ```
+
+    You can learn more about Nix language [here](https://nix.dev/manual/nix/2.29/language) (by having a quick glance at the table) or [here](https://nix.dev/tutorials/nix-language) (for a more informative guide). You can also just look at the `config.nix` in the opinionated template and infer the syntax :)
 
 1. We have two templates, pick your poison:
 
 - Default template: Bare minimum to get you started. Initialize it with:
-```bash
-nix flake init -t github:Vortriz/scientific-env#default
-```
+
+    ```bash
+    nix flake init -t github:Vortriz/scientific-env#default
+    ```
 
 - Opinionated template: Comes with a set of tools that I prefer to use, which includes:
     - [marimo](https://marimo.io) - A Jupyter-like notebook for python which is just plain better. Additional configuration for it is also included.
+    - [ruff](https://docs.astral.sh/ruff) - An extremely fast Python linter and code formatter, written in Rust.
     - [typst](https://typst.app) - A modern typesetting language with instant preview and intuitive syntax.
 
     Initialize it with:
@@ -36,26 +37,81 @@ nix flake init -t github:Vortriz/scientific-env#default
     nix flake init -t github:Vortriz/scientific-env#opinionated
     ```
 
-The welcome message will guide you further for setup.
-
 2. After configuring the template, you can run the following command to enter the environment:
 
-```bash
-nix develop
-```
+    ```bash
+    nix develop
+    ```
 
-If you have [direnv](https://direnv.net) installed, then just `direnv allow` the project.
+    If you have [direnv](https://direnv.net) installed, then just `direnv allow` the project.
 
 ## Configuration
 
 > [!NOTE]
 > Run `nix develop` or `direnv allow` after modifying `config.nix` to apply the changes.
 
-The configuration is done in `config.nix`. You can add or remove languages, tools, and other dependencies as needed.
+The configuration is done in `config.nix`. You can add or remove languages, tools, and other dependencies as needed. The config contains "environments". The main one is called the `default` environment. Other ones included are `python` and `julia`.
 
-Following is a sample `config.nix` with all the options you can set:
+### Available options
+
+All three environments expose the following options:
+
+- `enable` (Type - `bool`) (Default - `false`) (Example - `true`)
+
+    To enable the environment and the corresponding settings.
+
+- `package` (Type - `derivation`) (Default - `null`) (Example - `pkgs.python312`)
+
+    The main package for the environment. This is mandatory to set if the environment is `enable`d. You can search for it on https://search.nixos.org/packages. (The `default` environment also exposes this option by design, but it doesn't make sense to set it)
+
+> [!NOTE]
+> `derivation` in Nix context is a fancy word for package
+
+
+- `extraPackages` (Type - `list of derivations`) (Default - `[]`) (Example - `[pkgs.hello pkgs.typst]`)
+
+    Extra tools you want in the environment. You can search for the ones you want on https://search.nixos.org/packages.
+
+- `env` (Type - `attribute set`) (Default - `{}`) (Example - `{JULIA_NUM_THREADS = "auto"}`)
+
+    Environment variables that will be available in the environment.
+
+- `shellHook` (Type - `string`) (Default - `""`) (Example - "echo 'Its time to get some shit done!'")
+
+    Bash commands to be executed on starting the environment in the terminal.
+
+### Sample configuration
+
+Following is a sample `config.nix` with all three environment enabled and setup:
 
 ```nix
+pkgs: {
+    # All config is built for "x86_64-linux". To use other systems, edit `systems` variable in `flake.nix`.
+
+    # Default (main) environment options
+    default = {
+        enable = true;
+
+        extraPackages = with pkgs; [
+            typst
+        ];
+    };
+
+    # Python configuration
+    python = {
+        enable = true;
+        package = pkgs.python312;
+    };
+
+    # Julia configuration
+    julia = {
+        enable = true;
+        package = pkgs.julia-bin; # It is suggested to use julia-bin
+        env = {
+            JULIA_NUM_THREADS = "auto";
+        };
+    };
+}
 
 ```
 
