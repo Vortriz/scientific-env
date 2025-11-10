@@ -2,6 +2,20 @@
 
 Setup per project scientific development environments with ease, without dependency conflicts or messing up your global environment, all while preserving whatever sanity you have left!
 
+> [!WARNING]
+> This is no longer maintained, but it should just work. That being said, I would not recommend using this.
+> There exist better ways/solutions which I was not aware of at the time of making this.
+>
+> These are some of the alternatives you can check out:
+> - [devenv](https://devenv.sh) - Simple, uses Nix for config
+> - [devbox](https://www.jetify.com/devbox) - Simple, uses Nix on the backend so you don't have to deal with it
+> - [devshell](https://github.com/numtide/devshell) - More involved, uses Nix
+>
+> If you want a more direct replacement, you can check out [a template I made](https://github.com/Vortriz/dotfiles/blob/main/templates/minimal-sci-env/flake.nix). Get it with
+> ```
+> nix flake init -t github:Vortriz/dotfiles#minimal-sci-env
+> ```
+
 ## Features
 
 - **Python** - Excellent support for using Python via [uv](https://docs.astral.sh/uv)
