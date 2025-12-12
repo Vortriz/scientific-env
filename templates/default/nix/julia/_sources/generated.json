@@ -1,0 +1,23 @@
+{
+    "registry": {
+        "cargoLocks": null,
+        "date": "2025-12-12",
+        "extract": null,
+        "name": "registry",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "codedownio",
+            "repo": "General",
+            "rev": "98f4a21a86069a26da28dd991e035ea9e972af18",
+            "sha256": "sha256-Nz363UFfFUTmCoTOBK0jYuSfCDkK7emhJ2MnDkEoIGo=",
+            "sparseCheckout": [],
+            "type": "github"
+        },
+        "version": "98f4a21a86069a26da28dd991e035ea9e972af18"
+    }
+}

@@ -1,0 +1,3 @@
+[registry]
+src.git = "https://github.com/codedownio/General"
+fetch.github = "codedownio/General"
