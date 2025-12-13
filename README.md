@@ -61,7 +61,7 @@ Setup per project scientific development environments with ease, without depende
 
 1. Delete `nix/<some-language>` folder if you absolutely don't want to use that language in your project.
 2. (Optional) If you use direnv, you can change the default environment to auto-load by modifying the `use flake .#default` line in the `.envrc` file.
-    - e.g. change to `use flake .#python` to auto-load python environment
+    - e.g. change to `use flake .#python` to auto-load Python environment
 3. The default environment is blank. You can modify the `nix/default/shell.nix` file to configure it to your liking. Refer to [devshell docs](https://numtide.github.io/devshell/modules_schema.html) for more information or look at `nix/<language>/shell.nix` files for examples.
 
 > [!NOTE]
@@ -161,10 +161,10 @@ Added benefit of this template is that you can have multiple languages in the sa
 
 ## FAQs
 
-### How to change python version?
+### How to change Python version?
 
-Change the python version in `nix/python/shell.nix` file. For example, to use python 3.11, change `pythonPkg` value to `pkgs.python311`. Nixpkgs supports python versions from 3.10 to 3.14.
+Change the Python version in `nix/python/shell.nix` file. For example, to use Python 3.11, change `pythonPkg` value to `pkgs.python311`. Nixpkgs supports Python versions from 3.10 to 3.14.
 
-### I dont't understand Nix, how do I configure X thing?
+### I don't understand Nix, how do I configure X thing?
 
 Refer to the [devshell docs](https://numtide.github.io/devshell/modules_schema.html) for more information on how to configure the shell.nix files. You can also look at the existing `nix/<language>/shell.nix` files for examples. Feel free to open a [Github discussion](https://github.com/Vortriz/scientific-env/discussions/categories/q-a) or hit me up on [Matrix](https://matrix.to/#/@vortriz:matrix.org).
