@@ -1,7 +1,7 @@
 pkgs:
 pkgs.julia.withPackages.override
     {
-        augmentedRegistry = (pkgs.callPackage ./_sources/generated.nix { }).registry.src;
+        augmentedRegistry = import ./_registry.nix { inherit (pkgs) fetchFromGitHub; };
     }
     [
         "Pluto"

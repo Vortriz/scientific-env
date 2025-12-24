@@ -1,6 +1,12 @@
+{ inputs, ... }:
 {
     perSystem =
-        { pkgs, ... }:
+        {
+            lib,
+            pkgs,
+            system,
+            ...
+        }:
         let
             juliaEnv = import ./_package.nix pkgs;
         in
@@ -23,10 +29,11 @@
                         name = "update-registry";
                         category = "[julia]";
                         help = "Update Julia package registry";
-                        package = pkgs.nvfetcher;
-                        command = ''
-                            nvfetcher -c ${./nvfetcher.toml} -o ${./_sources}
-                        '';
+                        command = lib.getExe (
+                            pkgs.writers.writePython3Bin "update-registry" {
+                                libraries = [ inputs.nima.packages.${system}.default ];
+                            } ./update-registry.py
+                        );
                     }
                 ];
 
@@ -41,7 +48,10 @@
                     }
                 ];
 
-                packages = [ juliaEnv ];
+                packages = [
+                    juliaEnv
+                    pkgs.nix-prefetch-git
+                ];
             };
         };
 }

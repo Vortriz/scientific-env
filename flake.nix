@@ -31,7 +31,6 @@
                 pkgs.treefmt.withConfig {
                     runtimeInputs = [ pkgs.nixfmt ];
                     settings = {
-                        excludes = [ "**/_sources/**" ];
                         formatter.nixfmt = {
                             command = "nixfmt";
                             includes = [ "*.nix" ];
