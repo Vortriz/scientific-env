@@ -14,9 +14,7 @@
         {
             templates = {
                 default = {
-                    description = ''
-                        Opinionated flake
-                    '';
+                    description = "Opinionated flake";
                     path = ./templates/default;
                     welcomeText = ''
                         Welcome to the scientific dev environment!
