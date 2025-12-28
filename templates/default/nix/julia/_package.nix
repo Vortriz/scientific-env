@@ -1,10 +1,14 @@
 pkgs:
 pkgs.julia.withPackages.override
     {
-        augmentedRegistry = import ./_registry.nix { inherit (pkgs) fetchFromGitHub; };
+        augmentedRegistry = pkgs.callPackage ./_registry.nix { };
     }
     [
         "Pluto"
+        "ArgParse"
         "LanguageServer"
         "JuliaFormatter"
+
+        # Add your packages here
+
     ]

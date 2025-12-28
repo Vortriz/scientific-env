@@ -8,3 +8,7 @@ result*
 **/__marimo__/session
 **/__pycache__
 .ruff_cache
+
+# Julia
+Project.toml
+Manifest.toml

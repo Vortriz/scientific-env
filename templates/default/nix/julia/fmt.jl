@@ -1,4 +1,4 @@
 using JuliaFormatter
 
-# configuration: https://domluna.github.io/JuliaFormatter.jl/stable/
+# https://domluna.github.io/JuliaFormatter.jl/stable/#Formatting-Options
 format(".", format_markdown = true)
