@@ -3,7 +3,10 @@
         treefmt = {
             programs = {
                 ruff-format.enable = true;
-                ruff-check.enable = true;
+                ruff-check = {
+                    enable = true;
+                    extendSelect = [ "I" ];
+                };
             };
 
             settings.formatter = {
