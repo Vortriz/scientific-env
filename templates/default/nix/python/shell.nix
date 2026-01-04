@@ -48,7 +48,7 @@
                         command = ''
                             uv init --bare
                             uv add marimo python-lsp-server websockets nbformat
-                            ln -sr ${./marimo.toml} $PRJ_ROOT/.marimo.toml
+                            ln -sr ${./.marimo.toml} $PRJ_ROOT/.marimo.toml
                         '';
                     }
                 ];
