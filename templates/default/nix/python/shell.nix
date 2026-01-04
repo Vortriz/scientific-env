@@ -8,6 +8,7 @@
             devshells.python = {
                 devshell = {
                     name = "python";
+                    motd = "";
                     startup.default.text = "unset PYTHONPATH";
                 };
 

@@ -10,6 +10,7 @@ Setup per project scientific development environments with ease, without depende
     - [Python](#python)
     - [Julia](#julia)
     - [Typst](#typst)
+- [Tips](#tips)
 - [Why this?](#why-this)
 - [FAQs](#faqs)
 
@@ -148,6 +149,10 @@ Typst code is formatted using [typstyle](https://github.com/typstyle-rs/typstyle
 ```bash
 nix fmt
 ```
+
+## Tips
+
+- Run `menu` to see all the available helper commands while inside each language's environment.
 
 ## Why this?
 This is a very opinionated setup that I have refined over a long time to strike a balance between the reproducibility of pure Nix environments and convenience of language specific tools. This lets me focus on the work rather than deal with ✨ Dependency Hell ✨.

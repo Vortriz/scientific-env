@@ -15,6 +15,7 @@
             devshells.julia = {
                 devshell = {
                     name = "julia";
+                    motd = "";
                     startup.default.text =
                         let
                             projectPath = "${juliaEnv.projectAndDepot.outPath}/project";
