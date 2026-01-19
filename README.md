@@ -56,7 +56,8 @@ Setup per project scientific development environments with ease, without depende
         nix develop
         ```
 
-    (Optional) You can also install [direnv](https://direnv.net) to auto-load the project environment whenever you enter the directory. Then just `direnv allow` the project.
+> [!TIP]
+> You can also install [direnv](https://direnv.net) to auto-load the project environment whenever you enter the directory. After installation, run `direnv allow` inside the project.
 
 ## Configuration
 
