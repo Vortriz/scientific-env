@@ -30,25 +30,19 @@
 
                 commands = [
                     {
-                        name = "create";
-                        category = "[julia]";
-                        help = "Create Pluto notebook and run it";
-                        command = lib.getExe (
-                            pkgs.writeScriptBin "create" ''
-                                if [ -z "$1" ]; then
-                                    ${julia} ${./create.jl} --help
-                                else
-                                    ${julia} ${./create.jl} "$1"
-                                fi
-                            ''
-                        );
-                    }
-                    {
                         name = "pluto";
                         category = "[julia]";
                         help = "Launch Pluto";
                         command = ''
                             ${julia} -e "import Pluto; Pluto.run()"
+                        '';
+                    }
+                    {
+                        name = "precompile";
+                        category = "[julia]";
+                        help = "Precompile Julia packages";
+                        command = ''
+                            ${julia} -e "import Pkg; Pkg.precompile()"
                         '';
                     }
                     {
@@ -77,6 +71,13 @@
                 packages = [
                     juliaEnv
                     pkgs.nix-prefetch-git
+                    (pkgs.writeScriptBin "create" ''
+                        if [ -z "$1" ]; then
+                            ${julia} ${./create.jl} --help
+                        else
+                            ${julia} ${./create.jl} "$1"
+                        fi
+                    '')
                 ];
             };
         };

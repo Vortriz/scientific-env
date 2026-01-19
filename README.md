@@ -114,9 +114,17 @@ The following command enters Julia environment and updates the package registry:
 nix develop .#julia -c update-registry
 ```
 
-This will take a significant time to run, since Julia is precompiling the necessary packages.
+Add your Julia dependencies to `nix/julia/_package.nix` and re-run `nix develop .#julia`.
 
-Add your Julia dependencies to `nix/julia/_package.nix` and re-run `nix develop .#julia`. After that, create and launch a new Pluto notebook with:
+Precompile your packages with:
+
+```bash
+precompile
+```
+
+This will take a significant time to run, depending on the number of packages.
+
+After that, create and launch a new Pluto notebook with:
 
 ```bash
 create <some-name>.jl
