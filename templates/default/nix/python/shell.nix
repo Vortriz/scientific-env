@@ -2,7 +2,13 @@
     perSystem =
         { pkgs, ... }:
         let
-            pythonPkg = pkgs.python313;
+            # Python libraries often load native shared objects using dlopen(3).
+            # Setting LD_LIBRARY_PATH makes the dynamic library loader aware of libraries without using RPATH for lookup.
+            # We use manylinux2014 which is compatible with 3.7.8+, 3.8.4+, 3.9.0+
+            pythonPkg = pkgs.writeShellScriptBin "python-with-manyLinux" ''
+  		export LD_LIBRARY_PATH=${pkgs.lib.makeLibraryPath pkgs.pythonManylinuxPackages.manylinux2014}
+		exec ${pkgs.python3}/bin/python "$@"
+ 		'';
         in
         {
             devshells.python = {
@@ -29,14 +35,7 @@
                     {
                         # Force uv to use nixpkgs Python interpreter
                         name = "UV_PYTHON";
-                        value = pythonPkg.interpreter;
-                    }
-                    {
-                        # Python libraries often load native shared objects using dlopen(3).
-                        # Setting LD_LIBRARY_PATH makes the dynamic library loader aware of libraries without using RPATH for lookup.
-                        # We use manylinux2014 which is compatible with 3.7.8+, 3.8.4+, 3.9.0+
-                        name = "LD_LIBRARY_PATH";
-                        prefix = pkgs.lib.makeLibraryPath pkgs.pythonManylinuxPackages.manylinux2014;
+                        value = "${pythonPkg}/bin/python-with-manyLinux";
                     }
                 ];
 
